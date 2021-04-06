@@ -21,6 +21,7 @@ QUI=
 [Relative]
 SetupOCXFile=
 [Comment]
+Use mouse wheel up and down to play pet battle automatically
 
 [Script]
 Function randInt(base, range)
