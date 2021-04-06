@@ -41,6 +41,7 @@ Function wheelUp()
 	End If
 End Function
 
+
 Function wheelDown()
 	Dim delay0
 	Dim delay1
@@ -60,33 +61,32 @@ Function wheelDown()
 		delay1 = 0	
 	End If
 	
-	MouseWheel -1 
+	MouseWheel -1
 	Delay delay2
 	
-	TracePrint "wheel down inner " & delay0 & ", " & delay1 & ", " & delay2
 	wheelDown = delay0 + delay1 + delay2
 End Function
 
 
 // start here
+TracePrint now & " >>>round start "
+
 For 1000
 	Delay randInt(1000, 1000)
 	
-	
 	wheelUp
 	wheelDown
-	Delay randInt(1800, 1000)
+	Delay randInt(800, 400)
 	
 	wheelUp
-	Delay randInt(1000, 500)
-	
+	Delay randInt(1000, 400)
 	
 	total = 0
 	
 	For 999
 		cost = wheelDown()
 		
-		TracePrint "wheel down cost " & cost & ", total " & total
+		TracePrint now & " >>>wheel down cost " & cost & ", total " & total
 		total = total + cost
 		
 		If total > 71000 Then 
@@ -95,12 +95,12 @@ For 1000
 	Next
 	
 	Rem toExit
-	TracePrint "round cost " & total
+	TracePrint now & " >>>total cost " & total
 	
 	randWait = int(rnd() * 100)
 	If randWait < 2 Then 
 		Delay randInt(55000, 30000)
-		TracePrint "rand sleep enter"
+		TracePrint now & " >>>rand sleep enter"
 		
 		KeyDown "Space", 1
 		Delay randInt(800, 500)
