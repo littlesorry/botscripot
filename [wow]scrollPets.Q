@@ -28,18 +28,24 @@ Function randInt(base, range)
 	randInt = base + int(rnd() * range)
 End Function
 
+Function oneWheel(direction, base, range, condition)
+	Dim delay0
+	delay0 = 0
+	 
+	If condition > 100 or randInt(0, 100) < condition Then 
+		MouseWheel direction
+		delay0 = randInt(base, range)
+		Delay delay0
+	End If
+	
+	oneWheel = delay0
+End Function
+
 
 Function wheelUp()
-	MouseWheel 1
-	Delay randInt(100, 100)
-
-	MouseWheel 1
-	Delay randInt(300, 100)
-	
-	If randInt(0, 100) < 33 Then 
-		MouseWheel 1
-		Delay randInt(200, 200)	
-	End If
+	oneWheel 1, 100, 100, 999
+	oneWheel 1, 300, 100, 999
+	oneWheel 1, 200, 200, 33
 End Function
 
 
@@ -48,43 +54,33 @@ Function wheelDown()
 	Dim delay1
 	Dim delay2
 	
-	delay0 = randInt(100, 100)
-	delay1 = randInt(200, 100)
-	delay2 = randInt(700, 300)
+	delay0 = 0
+	delay0 = delay0 + oneWheel(-1 , 100, 50, 999)
+	delay0 = delay0 + oneWheel(-1 , 80, 40, 999)
+	delay0 = delay0 + oneWheel(-1, 80, 50, 75)
+	delay0 = delay0 + oneWheel(-1, 100, 50, 66)
+	delay0 = delay0 + oneWheel(-1, 700, 300, 999)
 	
-	MouseWheel -1
-	Delay delay0
-	
-	If randInt(0, 100) < 66 Then 
-		MouseWheel -1
-		Delay delay1
-	Else 
-		delay1 = 0	
-	End If
-	
-	MouseWheel -1
-	Delay delay2
-	
-	wheelDown = delay0 + delay1 + delay2
+	wheelDown = delay0
 End Function
 
 
 // start here
 TracePrint now & " >>>round start "
 
-For 1000
-	Delay randInt(1000, 1000)
+For 99
+	Delay randInt(1000, 500)
 	
 	wheelUp
 	wheelDown
-	Delay randInt(800, 400)
+	Delay randInt(900, 400)
 	
 	wheelUp
-	Delay randInt(1000, 400)
+	Delay randInt(1000, 500)
 	
 	total = 0
 	
-	For 999
+	For 99
 		cost = wheelDown()
 		
 		TracePrint now & " >>>wheel down cost " & cost & ", total " & total
