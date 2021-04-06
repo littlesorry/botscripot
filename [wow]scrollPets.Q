@@ -97,9 +97,8 @@ For 1000
 	Rem toExit
 	TracePrint now & " >>>total cost " & total
 	
-	randWait = int(rnd() * 100)
-	If randWait < 2 Then 
-		Delay randInt(55000, 30000)
+	If randInt(0, 100) < 2 Then 
+		Delay randInt(59000, 30000)
 		TracePrint now & " >>>rand sleep enter"
 		
 		KeyDown "Space", 1
