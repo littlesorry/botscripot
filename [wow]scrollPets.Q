@@ -43,33 +43,31 @@ End Function
 
 
 Function wheelUp()
-	oneWheel 1, 100, 100, 999
+	oneWheel 1, 80, 80, 999
 	oneWheel 1, 300, 100, 999
-	oneWheel 1, 200, 200, 33
+	oneWheel 1, 100, 100, 33
 End Function
 
 
 Function wheelDown()
 	Dim delay0
-	Dim delay1
-	Dim delay2
 	
 	delay0 = 0
-	delay0 = delay0 + oneWheel(-1 , 100, 50, 999)
+	delay0 = delay0 + oneWheel(-1 , 70, 50, 999)
 	delay0 = delay0 + oneWheel(-1 , 80, 40, 999)
-	delay0 = delay0 + oneWheel(-1, 80, 50, 75)
+	delay0 = delay0 + oneWheel(-1, 90, 50, 75)
 	delay0 = delay0 + oneWheel(-1, 100, 50, 66)
-	delay0 = delay0 + oneWheel(-1, 700, 300, 999)
+	delay0 = delay0 + oneWheel(-1, 600, 300, 999)
 	
 	wheelDown = delay0
 End Function
 
 
 // start here
-TracePrint now & " >>>round start "
+TracePrint now & " >>>round start"
 
 For 99
-	Delay randInt(1000, 500)
+	Delay randInt(1000, 200)
 	
 	wheelUp
 	wheelDown
@@ -87,11 +85,11 @@ For 99
 		total = total + cost
 		
 		If total > 71000 Then 
-			Goto toExit
+			Goto toNext
 		End If
 	Next
 	
-	Rem toExit
+	Rem toNext
 	TracePrint now & " >>>total cost " & total
 	
 	If randInt(0, 100) < 2 Then 
