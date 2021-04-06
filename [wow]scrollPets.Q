@@ -9,7 +9,7 @@ StopHotkeyMod=0
 RunOnce=1
 EnableWindow=
 MacroID=b52ebaa4-44c9-4efc-acb4-003cd7810097
-Description=[wow]¹ö¹ö
+Description=[wow]petBattle
 Enable=1
 AutoRun=0
 [Repeat]
