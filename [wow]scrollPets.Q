@@ -14,7 +14,7 @@ Enable=1
 AutoRun=0
 [Repeat]
 Type=2
-Number=10860
+Number=14460
 [SetupUI]
 Type=2
 QUI=
