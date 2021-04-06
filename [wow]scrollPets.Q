@@ -23,66 +23,87 @@ SetupOCXFile=
 [Comment]
 
 [Script]
-
-Delay int(rnd() * 1000) + 1000
-
-MouseWheel 1
-Delay int(rnd() * 50) + 100
-
-MouseWheel 1
-Delay int(rnd() * 200) + 500
+Function randInt(base, range)
+	randInt = base + int(rnd() * range)
+End Function
 
 
+Function wheelUp()
+	MouseWheel 1
+	Delay randInt(100, 100)
 
-MouseWheel -1
-Delay int(rnd() * 100) + 100
-
-MouseWheel -1
-Delay  int(rnd() * 120) + 100
-
-MouseWheel - 1 
-
-
-Delay int(rnd() * 1000) + 2000
-
-
-MouseWheel 1
-Delay int(rnd() * 100) + 100
-
-MouseWheel 1
-Delay int(rnd() * 500) + 1200
-
-total = 0
-
-For 70
-	MouseWheel -1
-	rr0 = int(rnd() * 80) + 120
-	Delay rr0
+	MouseWheel 1
+	Delay randInt(300, 100)
 	
-	MouseWheel -1
-	rr1 = int(rnd() * 100) + 100
-	Delay rr1
-		
-	MouseWheel -1
-	rr2 = int(rnd() * 500) + 650
-	Delay rr2
-		
-	total = total + rr0 + rr1 + rr2
-	If total > 70000 Then 
-		Goto toExit
+	If randInt(0, 100) < 33 Then 
+		MouseWheel 1
+		Delay randInt(200, 200)	
 	End If
-Next
+End Function
 
-Rem toExit
-
-
-
-randWait = int(rnd() * 100)
-If randWait < 2 Then
-	waitTime = int(rnd() * 30000) + 55000
-	Delay waitTime
+Function wheelDown()
+	Dim delay0
+	Dim delay1
+	Dim delay2
 	
-	KeyDown "Space", 1
-	Delay int(rnd() * 500) + 1000
-	KeyUp "Space", 1
-End If
+	delay0 = randInt(100, 100)
+	delay1 = randInt(200, 100)
+	delay2 = randInt(700, 300)
+	
+	MouseWheel -1
+	Delay delay0
+	
+	If randInt(0, 100) < 66 Then 
+		MouseWheel -1
+		Delay delay1
+	Else 
+		delay1 = 0	
+	End If
+	
+	MouseWheel -1 
+	Delay delay2
+	
+	TracePrint "wheel down inner " & delay0 & ", " & delay1 & ", " & delay2
+	wheelDown = delay0 + delay1 + delay2
+End Function
+
+
+// start here
+For 1000
+	Delay randInt(1000, 1000)
+	
+	
+	wheelUp
+	wheelDown
+	Delay randInt(1800, 1000)
+	
+	wheelUp
+	Delay randInt(1000, 500)
+	
+	
+	total = 0
+	
+	For 999
+		cost = wheelDown()
+		
+		TracePrint "wheel down cost " & cost & ", total " & total
+		total = total + cost
+		
+		If total > 71000 Then 
+			Goto toExit
+		End If
+	Next
+	
+	Rem toExit
+	TracePrint "round cost " & total
+	
+	randWait = int(rnd() * 100)
+	If randWait < 2 Then 
+		Delay randInt(55000, 30000)
+		TracePrint "rand sleep enter"
+		
+		KeyDown "Space", 1
+		Delay randInt(800, 500)
+		KeyUp "Space", 1
+	End If
+Next	
